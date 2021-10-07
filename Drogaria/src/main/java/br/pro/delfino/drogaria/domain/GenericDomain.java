@@ -13,12 +13,17 @@ public class GenericDomain implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codigo;
-	
+
 	public Long getCodigo() {
 		return codigo;
 	}
-	
+
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s[codigo=%d]", getClass().getSimpleName(), getCodigo());
 	}
 }
