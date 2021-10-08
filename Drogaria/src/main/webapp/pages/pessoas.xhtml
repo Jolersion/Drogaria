@@ -78,7 +78,9 @@
 				<p:inputText id="rg" />
 
 				<p:outputLabel for="cpf" value="CPF:" />
-				<p:inputText id="cpf" />
+				<p:inputMask id="cpf" mask="999.999.999-99" size="10"
+					value="#{pessoaBean.pessoa.cpf}" required="true"
+					requiredMessage="O campo 'CPF' é obrigatório" />
 
 				<p:outputLabel for="estado" value="Estado:" />
 				<p:selectOneMenu id="estado" filter="true"
@@ -130,7 +132,7 @@
 				<p:inputText id="telefone" />
 
 				<p:outputLabel for="celular" value="Celular:" />
-				<p:inputText id="celular" />
+				<p:inputMask id="celular" mask="(99)99999-9999" />
 
 				<p:outputLabel for="email" value="Email:" />
 				<p:inputText id="email" maxlength="100" size="50"
