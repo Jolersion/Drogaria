@@ -9,24 +9,32 @@
 	<title>Usuários</title>
 </h:head>
 <h:body>
+	<p:growl id="mensagem" />
 	<h:form>
 		<p:panel header="Usuários - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
-				paginator="true">
+				paginator="true" value="#{usuarioBean.usuarios}" var="usuario"
+				rows="5">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
 				</f:facet>
 
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{usuario.pessoa.nome}"
+					filterBy="#{usuario.pessoa.nome}">
+					<h:outputText value="#{usuario.pessoa.nome}" />
 				</p:column>
 
-				<p:column headerText="CPF">
+				<p:column headerText="CPF" sortBy="#{usuario.pessoa.cpf}"
+					filterBy="#{usuario.pessoa.cpf}">
+					<h:outputText value="#{usuario.pessoa.cpf}" />
 				</p:column>
-				
-				<p:column headerText="Tipo">
+
+				<p:column headerText="Tipo" sortBy="#{usuario.tipoFormatado}">
+					<h:outputText value="#{usuario.tipoFormatado}" />
 				</p:column>
-				
-				<p:column headerText="Ativo">
+
+				<p:column headerText="Ativo" sortBy="#{usuario.ativoFormatado}">
+					<h:outputText value="#{usuario.ativoFormatado}" />
 				</p:column>
 
 				<p:column headerText="Opções">
@@ -43,20 +51,20 @@
 				<p:selectOneMenu filter="true">
 					<f:selectItem itemValue="" itemLabel="Selecione uma pessoa" />
 				</p:selectOneMenu>
-				
+
 				<p:outputLabel value="Senha:" />
 				<p:password maxlength="8" size="10" />
-				
+
 				<p:outputLabel value="Tipo:" />
 				<p:selectOneRadio>
 					<f:selectItem itemValue="A" itemLabel="Administrador" />
 					<f:selectItem itemValue="G" itemLabel="Gerente" />
 					<f:selectItem itemValue="B" itemLabel="Balconista" />
 				</p:selectOneRadio>
-				
+
 				<p:outputLabel value="Ativo:" />
 				<p:selectBooleanCheckbox />
-	
+
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
