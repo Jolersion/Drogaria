@@ -7,6 +7,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Clientes</title>
+	<h:outputScript library="js" name="scripts.js" />
 </h:head>
 <h:body>
 	<p:growl id="mensagem" />
@@ -73,7 +74,7 @@
 				<p:calendar id="dataCadastro"
 					value="#{clienteBean.cliente.dataCadastro}" required="true"
 					requiredMessage="O campo 'Data de Cadastro' é obrigatório"
-					size="10" />
+					size="10" locale="pt_BR" />
 
 				<p:outputLabel for="liberado" value="Liberado:" />
 				<p:selectBooleanCheckbox id="liberado"
