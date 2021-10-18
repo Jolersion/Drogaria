@@ -48,7 +48,20 @@ public class FabricanteService {
 		Fabricante fabricante = gson.fromJson(json, Fabricante.class);
 
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
-		fabricanteDAO.merge(fabricante);
+		fabricanteDAO.salvar(fabricante);
+
+		String jsonSaida = gson.toJson(fabricante);
+		return jsonSaida;
+	}
+
+	// http://127.0.0.1:8080/Drogaria/rest/fabricante
+	@PUT
+	public String editar(String json) {
+		Gson gson = new Gson();
+		Fabricante fabricante = gson.fromJson(json, Fabricante.class);
+
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		fabricanteDAO.editar(fabricante);
 
 		String jsonSaida = gson.toJson(fabricante);
 		return jsonSaida;
