@@ -29,7 +29,7 @@ public class FabricanteService {
 	}
 
 	// http://127.0.0.1:8080/Drogaria/rest/fabricante/{codigo}
-	// http://127.0.0.1:8080/Drogaria/rest/fabricante/10
+	// http://127.0.0.1:8080/Drogaria/rest/fabricante/1
 	@GET
 	@Path("{codigo}")
 	public String buscar(@PathParam("codigo") Long codigo) {
