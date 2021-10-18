@@ -2,6 +2,7 @@ package br.pro.delfino.drogaria.service;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -65,5 +66,19 @@ public class FabricanteService {
 
 		String jsonSaida = gson.toJson(fabricante);
 		return jsonSaida;
+	}
+	
+	// http://127.0.0.1:8080/Drogaria/rest/fabricante
+	@DELETE
+	public String excluir(String json){
+		Gson gson = new Gson();
+		Fabricante fabricante = gson.fromJson(json, Fabricante.class);
+		
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		fabricante = fabricanteDAO.buscar(fabricante.getCodigo());
+		fabricanteDAO.excluir(fabricante);
+		
+		String saida = gson.toJson(fabricante);
+		return saida;
 	}
 }
