@@ -47,7 +47,7 @@ public class FabricanteDAOTest {
 		}
 	}
 	
-	@Test
+	@Test	
 	@Ignore
 	public void merge() {
 		//Fabricante fabricante = new Fabricante();
