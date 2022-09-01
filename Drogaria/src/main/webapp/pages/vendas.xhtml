@@ -50,7 +50,7 @@
 		<p:panel header="Cesta de Compras">
 			<p:dataTable id="tabelaCesta" emptyMessage="Nenhum registro encontrado."
 				paginator="true" value="#{vendaBean.itensVenda}" var="itemVenda"
-				rows="4">
+				rows="6">
 
 				<p:column headerText="Descrição">
 					<h:outputText value="#{itemVenda.produto.descricao}" />
