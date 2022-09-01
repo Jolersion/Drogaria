@@ -24,6 +24,7 @@ public class Produto extends GenericDomain {
 	@JoinColumn(nullable = false)
 	private Fabricante fabricante;
 	
+		
 	@Transient
 	private String caminho;
 
