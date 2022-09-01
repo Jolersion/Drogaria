@@ -13,9 +13,9 @@
 
 	<h:form id="formulario">
 		<p:panel header="Produtos">
-			<p:dataTable id="tabelaProduto" emptyMessage="Nenhum registro encontrado."
-				paginator="true" value="#{vendaBean.produtos}" var="produto"
-				rows="5">
+			<p:dataTable id="tabelaProduto"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{vendaBean.produtos}" var="produto" rows="5">
 
 				<p:column headerText="Descrição" filterBy="#{produto.descricao}"
 					sortBy="#{produto.descricao}">
@@ -39,8 +39,9 @@
 				</p:column>
 
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-plus" actionListener="#{vendaBean.adicionar}"
-						update=":formulario:tabelaCesta">
+					<p:commandButton icon="ui-icon-plus"
+						actionListener="#{vendaBean.adicionar}"
+						update=":formulario:tabelaCesta :formulario:painelFinalizacao">
 						<f:attribute name="produtoSelecionado" value="#{produto}" />
 					</p:commandButton>
 				</p:column>
@@ -48,9 +49,9 @@
 		</p:panel>
 
 		<p:panel header="Cesta de Compras">
-			<p:dataTable id="tabelaCesta" emptyMessage="Nenhum registro encontrado."
-				paginator="true" value="#{vendaBean.itensVenda}" var="itemVenda"
-				rows="5">
+			<p:dataTable id="tabelaCesta"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{vendaBean.itensVenda}" var="itemVenda" rows="5">
 
 				<p:column headerText="Descrição">
 					<h:outputText value="#{itemVenda.produto.descricao}" />
@@ -65,7 +66,7 @@
 				<p:column headerText="Qtde.">
 					<h:outputText value="#{itemVenda.quantidade}" />
 				</p:column>
-				
+
 				<p:column headerText="Preço Parcial">
 					<h:outputText value="#{itemVenda.precoParcial}">
 						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
@@ -75,14 +76,21 @@
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-minus"
 						actionListener="#{vendaBean.remover}"
-						update=":formulario:tabelaCesta">
+						update=":formulario:tabelaCesta :formulario:painelFinalizacao">
 						<f:attribute name="itemSelecionado" value="#{itemVenda}" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</p:panel>
 
-		<p:panel header="Total">
+		<p:panel header="Finalização">
+			<h:panelGrid id="painelFinalizacao" columns="3">
+				<p:outputLabel value="Total: R$" />
+				<h:outputText value="#{vendaBean.venda.precoTotal}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+				<p:commandButton value="Finalizar" />
+			</h:panelGrid>
 		</p:panel>
 	</h:form>
 </h:body>

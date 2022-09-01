@@ -15,13 +15,24 @@ import org.omnifaces.util.Messages;
 import br.pro.delfino.drogaria.dao.ProdutoDAO;
 import br.pro.delfino.drogaria.domain.ItemVenda;
 import br.pro.delfino.drogaria.domain.Produto;
+import br.pro.delfino.drogaria.domain.Venda;
 
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
 public class VendaBean implements Serializable {
+	private Venda venda;
+	
 	private List<Produto> produtos;
 	private List<ItemVenda> itensVenda;
+	
+	public Venda getVenda() {
+		return venda;
+	}
+	
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
 
 	public List<Produto> getProdutos() {
 		return produtos;
@@ -40,12 +51,15 @@ public class VendaBean implements Serializable {
 	}
 
 	@PostConstruct
-	public void listar() {
+	public void novo() {
 		try {
+			venda = new Venda();
+			venda.setPrecoTotal(new BigDecimal("0.00"));
+			
 			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtos = produtoDAO.listar("descricao");
 
-			itensVenda = new ArrayList<>();
+			itensVenda = new ArrayList<>();	
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar carregar a tela de vendas");
 			erro.printStackTrace();
@@ -74,6 +88,8 @@ public class VendaBean implements Serializable {
 			itemVenda.setQuantidade(new Short(itemVenda.getQuantidade() + 1 + ""));
 			itemVenda.setPrecoParcial(produto.getPreco().multiply(new BigDecimal(itemVenda.getQuantidade())));
 		}
+		
+		calcular();
 	}
 
 	public void remover(ActionEvent evento) {
@@ -88,6 +104,17 @@ public class VendaBean implements Serializable {
 		
 		if(achou > -1){
 			itensVenda.remove(achou);
+		}
+		
+		calcular();
+	}
+	
+	public void calcular(){
+		venda.setPrecoTotal(new BigDecimal("0.00"));
+		
+		for(int posicao = 0; posicao < itensVenda.size(); posicao++){
+			ItemVenda itemVenda = itensVenda.get(posicao);
+			venda.setPrecoTotal(venda.getPrecoTotal().add(itemVenda.getPrecoParcial()));
 		}
 	}
 }
