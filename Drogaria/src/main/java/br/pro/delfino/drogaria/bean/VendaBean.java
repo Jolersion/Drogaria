@@ -79,8 +79,7 @@ public class VendaBean implements Serializable {
 		try {
 			venda = new Venda();
 			venda.setPrecoTotal(new BigDecimal("0.00"));
-			venda.setHorario(new Date());
-
+			
 			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtos = produtoDAO.listar("descricao");
 
@@ -146,6 +145,8 @@ public class VendaBean implements Serializable {
 	public void finalizar() {
 		try {
 			venda.setHorario(new Date());
+			venda.setCliente(null);
+			venda.setFuncionario(null);
 
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			funcionarios = funcionarioDAO.listarOrdenado();
@@ -167,6 +168,15 @@ public class VendaBean implements Serializable {
 			
 			VendaDAO vendaDAO = new VendaDAO();
 			vendaDAO.salvar(venda, itensVenda);
+			
+			
+			venda = new Venda();
+			venda.setPrecoTotal(new BigDecimal("0.00"));
+			
+			ProdutoDAO produtoDAO = new ProdutoDAO();
+			produtos = produtoDAO.listar("descricao");
+
+			itensVenda = new ArrayList<>();
 			
 			Messages.addGlobalInfo("Venda realizada com sucesso");
 		} catch (RuntimeException erro) {
