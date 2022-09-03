@@ -136,7 +136,7 @@ public class Pessoa extends GenericDomain {
 	public Cidade getCidade() {
 		return cidade;
 	}
-
+	
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
