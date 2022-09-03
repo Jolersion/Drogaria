@@ -144,6 +144,8 @@ public class VendaBean implements Serializable {
 	
 	public void finalizar(){
 		try{
+			venda.setHorario(new Date());
+			
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			funcionarios = funcionarioDAO.listarOrdenado();
 			
